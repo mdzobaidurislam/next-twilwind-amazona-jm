@@ -19,8 +19,16 @@ a {
   box-sizing: border-box;
 }
 
+.demo {
+  background-color: red;
+}
+
 .card {
   @apply mb-5 block rounded-lg border border-gray-200 shadow-md;
+}
+
+.demos {
+  @apply demo
 }
 
 @layer components {
