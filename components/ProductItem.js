@@ -7,7 +7,13 @@ const ProductItem = ({ product }) => {
     <div className="card">
       <Link href={`/product/${product.slug}`} legacyBehavior>
         <a>
-          <img alt={product.name} src={product.image} />
+          <Image
+            width="100"
+            height="100"
+            layout="responsive"
+            alt={product.name}
+            src={product.image}
+          />
         </a>
       </Link>
       <div className="flex flex-col justify-center p-5">
