@@ -7,10 +7,12 @@ import Image from "next/image";
 import { Store } from "../../utils/Store";
 
 export default function ProductScreen() {
+  // const router = useRouter();
   const { state, dispatch } = useContext(Store);
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const { slug } = query;
-  console.log(query);
+  // console.log(query);
+  console.log(push);
   const product = data.products.find((x) => x.slug === slug);
   if (!product) {
     return <div>Product not found</div>;
@@ -22,6 +24,7 @@ export default function ProductScreen() {
       type: "CART_ADD_ITEM",
       payload: { ...product, quantity },
     });
+    push("/cart");
   };
   return (
     <Layout title={product.name}>

@@ -1,8 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
+import { Store } from "../utils/Store";
 
 const ProductItem = ({ product }) => {
+  const { state, dispatch } = useContext(Store);
+  const addToCartHandler = () => {
+    const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    dispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...product, quantity },
+    });
+  };
+
   return (
     <div className="card">
       <Link href={`/product/${product.slug}`} legacyBehavior>
@@ -25,6 +36,7 @@ const ProductItem = ({ product }) => {
         <p className="mb-2"> {product.brand} </p>
         <p> ${product.price} </p>
         <button
+          onClick={addToCartHandler}
           type="button"
           className="primary-button hover:bg-amber-400 active:bg-amber-500"
         >
