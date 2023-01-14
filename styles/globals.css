@@ -43,6 +43,10 @@ textarea {
   @apply rounded w-full border-2 border-amber-300 p-3 outline-0;
 }
 
+.dropdown_menu {
+  @apply absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 outline-none
+}
+
 /* 
 .default-button {
   @apply rounded bg-gray-100 py-2 px-4 text-black shadow outline-none hover: bg-gray-200 active:bg-gray-300;

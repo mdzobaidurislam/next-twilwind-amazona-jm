@@ -4,17 +4,30 @@ import React, { useContext, useEffect, useState } from "react";
 import { Store } from "../utils/Store";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { Menu } from "@headlessui/react";
+import DropdownLink from "./DropdownLink";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 const Layout = ({ title, children }) => {
-  const { state } = useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const { status, data: session } = useSession();
   const [cartItemsCount, setCartItemsCount] = useState(0);
   const { cart } = state;
+  const router = useRouter();
   useEffect(() => {
     setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
   }, [cart.cartItems]);
-
+  const logoutClickHandler = async () => {
+    Cookies.remove("cart");
+    dispatch({
+      type: "CART_RESET",
+    });
+    const data = await signOut({ redirect: false, callbackUrl: "/login" });
+    console.log(data);
+    router.push(data.url);
+  };
   return (
     <>
       <Head>
@@ -43,7 +56,58 @@ const Layout = ({ title, children }) => {
               {status === "loading" ? (
                 "Loading"
               ) : session?.user ? (
-                session.user.name
+                <Menu as="div" className="relative inline-block">
+                  <Menu.Button className="text-blue-600">
+                    {session.user.name}
+                  </Menu.Button>
+                  <Menu.Items className="dropdown_menu">
+                    <div className="px-1 py-1 ">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <DropdownLink
+                            className={`${
+                              active
+                                ? "bg-violet-500 text-white"
+                                : "text-gray-900"
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            href="/profile"
+                          >
+                            Profile
+                          </DropdownLink>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <DropdownLink
+                            className={`${
+                              active
+                                ? "bg-violet-500 text-white"
+                                : "text-gray-900"
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            href="/order-history"
+                          >
+                            Order history
+                          </DropdownLink>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            className={`${
+                              active
+                                ? "bg-violet-500 text-white"
+                                : "text-gray-900"
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            href="#"
+                            onClick={logoutClickHandler}
+                          >
+                            Logout
+                          </button>
+                        )}
+                      </Menu.Item>
+                    </div>
+                  </Menu.Items>
+                </Menu>
               ) : (
                 <Link href="/login" legacyBehavior>
                   <a className="p-2">Login</a>
