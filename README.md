@@ -23,3 +23,6 @@
 16. Create SHipping Screen
     1. display address filds
     2. save address in context
+17. Create Payment Methods Screen
+    1. display payment methods
+    2. save payment methods in context

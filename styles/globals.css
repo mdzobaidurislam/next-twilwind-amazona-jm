@@ -37,10 +37,14 @@ a {
   }
 }
 
+.default-button {
+  @apply rounded bg-gray-300 py-2 px-4 shadow outline-none;
+}
+
 input,
 select,
 textarea {
-  @apply rounded w-full border-2 border-amber-300 p-3 outline-0;
+  @apply rounded border-2 border-amber-300 p-3 outline-0;
 }
 
 .dropdown_menu {
