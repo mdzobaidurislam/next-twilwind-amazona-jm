@@ -6,6 +6,7 @@ export default async function handler(req, res) {
 
   if (req.method === "GET") {
     const product = await Product.findOne({ slug: req.query.slug });
+    await db.connect();
     return res.json(product);
   }
 }
