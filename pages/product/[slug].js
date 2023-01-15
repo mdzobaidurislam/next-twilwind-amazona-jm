@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import Layout from "../../components/Layout";
-import data from "../../utils/data";
+// import data from "../../utils/data";
 import Link from "next/link";
 import Image from "next/image";
 import { Store } from "../../utils/Store";
@@ -12,8 +12,8 @@ export default function ProductScreen(props) {
   const { product } = props;
   // const router = useRouter();
   const { state, dispatch } = useContext(Store);
-  const { query, push } = useRouter();
-  const { slug } = query;
+  const { push } = useRouter();
+  // const { slug } = query;
   // console.log(query);
   // console.log(push);
   // const product = data.products.find((x) => x.slug === slug);
