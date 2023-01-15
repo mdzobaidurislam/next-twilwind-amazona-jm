@@ -6,6 +6,7 @@ import Image from "next/image";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import { toast } from "react-toastify";
 function CartScreen() {
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
@@ -22,10 +23,15 @@ function CartScreen() {
   };
   const updateCartHandler = (item, qty) => {
     const quantity = Number(qty);
+    if (item.countInStock < quantity) {
+      toast.error("Sorry. Product is out of stock");
+      return;
+    }
     dispatch({
       type: "CART_ADD_ITEM",
       payload: { ...item, quantity },
     });
+    toast.success(" Product update in the cart");
   };
   return (
     <Layout title="Shopping cart">

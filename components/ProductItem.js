@@ -2,16 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useContext } from "react";
 import { Store } from "../utils/Store";
+import { toast } from "react-toastify";
 
 const ProductItem = ({ product }) => {
   const { state, dispatch } = useContext(Store);
   const addToCartHandler = () => {
     const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
     const quantity = existItem ? existItem.quantity + 1 : 1;
+    if (product.countInStock < quantity) {
+      toast.error("Sorry. Product is out of stock");
+      return;
+    }
     dispatch({
       type: "CART_ADD_ITEM",
       payload: { ...product, quantity },
     });
+    toast.success(" Product added to the cart");
   };
 
   return (
