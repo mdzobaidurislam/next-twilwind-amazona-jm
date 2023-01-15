@@ -11,7 +11,7 @@ export default function PaymentScreen() {
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
   const { shippingAddress, paymentMethod } = cart;
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
   useEffect(() => {
     if (!shippingAddress.address) {
       return router.push("/shipping");
@@ -26,7 +26,7 @@ export default function PaymentScreen() {
     }
     dispatch({
       type: "SAVE_PAYMENT_METHOD",
-      payload: { selectedPaymentMethod },
+      payload: selectedPaymentMethod,
     });
     Cookies.set(
       "cart",
