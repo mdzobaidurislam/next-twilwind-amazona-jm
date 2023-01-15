@@ -20,7 +20,7 @@ function reducer(state, action) {
   }
 }
 
-export default function OrderScreen() {
+function OrderScreen() {
   const { query } = useRouter();
   const orderId = query.id;
   const [{ loading, error, order }, dispatch] = useReducer(reducer, {
@@ -165,3 +165,6 @@ export default function OrderScreen() {
     </Layout>
   );
 }
+
+OrderScreen.auth = true;
+export default OrderScreen;
