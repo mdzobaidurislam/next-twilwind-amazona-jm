@@ -58,7 +58,8 @@ const Layout = ({ title, children }) => {
               ) : session?.user ? (
                 <Menu as="div" className="relative inline-block">
                   <Menu.Button className="text-blue-600">
-                    {session.user.name}
+                    {session.user.isAdmin == "admin" ? "Admin" : "Normal"} ----
+                    {session.user.demo} || {session.user.name} ||
                   </Menu.Button>
                   <Menu.Items className="dropdown_menu">
                     <div className="px-1 py-1 ">
@@ -76,6 +77,21 @@ const Layout = ({ title, children }) => {
                           </DropdownLink>
                         )}
                       </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <DropdownLink
+                            className={`${
+                              active
+                                ? "bg-violet-500 text-white"
+                                : "text-gray-900"
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            href="/admin"
+                          >
+                            Admin
+                          </DropdownLink>
+                        )}
+                      </Menu.Item>
+
                       <Menu.Item>
                         {({ active }) => (
                           <DropdownLink

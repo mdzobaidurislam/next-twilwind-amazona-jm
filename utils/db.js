@@ -4,7 +4,7 @@ const connection = {};
 
 async function connect() {
   if (connection.isConnected) {
-    console.log("already connected");
+    console.log("allready connected");
     return;
   }
   if (mongoose.connections.length > 0) {
