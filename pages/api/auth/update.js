@@ -3,7 +3,7 @@ import db from "../../../utils/db";
 import User from "../../../models/User";
 import bcryptjs from "bcryptjs";
 
-async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== "PUT") {
     return res.status(400).send({ message: `${req.method} is not supported` });
   }
@@ -37,5 +37,3 @@ async function handler(req, res) {
     message: "User updated",
   });
 }
-
-export default handler;
