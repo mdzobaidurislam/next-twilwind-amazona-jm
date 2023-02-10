@@ -60,3 +60,7 @@
     2. connect to github
     3. set next auth and mongodb db in env vars
     4. push code to github
+26. Update User Profile
+    1. create profile screen
+    2. show user info
+    3. handle update user info
