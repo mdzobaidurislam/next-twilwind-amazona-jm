@@ -3,7 +3,6 @@ import "../styles/globals.css";
 import { StoreProvider } from "../utils/Store";
 import { useRouter } from "next/router";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { useEffect } from "react";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   // console.log(Component.auth);
