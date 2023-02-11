@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import { StoreProvider } from "../utils/Store";
 import { useRouter } from "next/router";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { useEffect } from "react";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   // console.log(Component.auth);
@@ -31,12 +32,13 @@ function Auth({ children, adminOnly }) {
       router.push("/unauthorized?message=login required");
     },
   });
+  console.log(session);
 
-  if (adminOnly && !session?.user?.isAdmin) {
-    router.push("/unauthorized?message=admin login required");
-  }
   if (status === "loading") {
     return <div>Loading...</div>;
+  }
+  if (adminOnly && !session.user?.isAdmin) {
+    router.push("/unauthorized?message=Admin login required");
   }
   return children;
 }

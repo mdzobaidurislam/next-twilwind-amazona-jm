@@ -12,17 +12,11 @@ export default NextAuth({
     async jwt({ token, user }) {
       if (user?._id) token._id = user._id;
       if (user?.isAdmin) token.isAdmin = user.isAdmin;
-      if (user?.demo) token.demo = user.demo;
-      console.log("user=>", user);
-      console.log("token=>", token);
       return token;
     },
     async session({ session, token }) {
       if (token?._id) session.user._id = token._id;
       if (token?.isAdmin) session.user.isAdmin = token.isAdmin;
-      session.userInfo = token._id;
-      session.user.demo = token.demo;
-      console.log("session=>", session);
       return session;
     },
   },
@@ -35,7 +29,7 @@ export default NextAuth({
         });
         // console.log(res);
         await db.disconnect();
-
+        console.log(user.isAdmin);
         if (user && bcryptjs.compareSync(credentials.password, user.password)) {
           return {
             ...user,
