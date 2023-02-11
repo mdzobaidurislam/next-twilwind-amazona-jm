@@ -40,11 +40,11 @@ export default function AdminOrderScreen() {
 
   return (
     <Layout title="Admin Dashboard">
-      <div className="grid md:grid-cols-4 md:gap-5">
+      <div className="grid md:grid-cols-8 md:gap-5">
         <div>
           <AdminSidebar />
         </div>
-        <div className="overflow-x-auto md:col-span-3">
+        <div className="overflow-x-auto md:col-span-7">
           <h1 className="mb-4 text-xl">Admin Orders</h1>
 
           {loading ? (

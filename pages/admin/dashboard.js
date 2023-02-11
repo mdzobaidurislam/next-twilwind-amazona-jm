@@ -88,11 +88,11 @@ function AdminDashboardScreen() {
   }
   return (
     <Layout title="Admin Dashboard">
-      <div className="grid  md:grid-cols-4 md:gap-5">
+      <div className="grid  md:grid-cols-8 md:gap-5">
         <div>
           <AdminSidebar />
         </div>
-        <div className="md:col-span-3">
+        <div className="md:col-span-7">
           <h1 className="mb-4 text-xl">Admin Dashboard</h1>
           {loading ? (
             <div>Loading...</div>
