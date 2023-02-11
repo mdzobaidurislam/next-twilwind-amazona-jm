@@ -4,7 +4,7 @@ import db from "../../../utils/db";
 import bcryptjs from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export default NextAuth({
+export const authOptions = {
   session: {
     strategy: "jwt",
   },
@@ -45,4 +45,5 @@ export default NextAuth({
       },
     }),
   ],
-});
+};
+export default NextAuth(authOptions);

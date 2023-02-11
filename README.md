@@ -64,3 +64,15 @@
     1. create profile screen
     2. show user info
     3. handle update user info
+27. Create Admin Dashboard
+    1. Create Admin Menu
+    2. create dashboard screen
+    3. Implement admin summary api
+28. List Orders For Admin
+    1. create orders page
+    2. create orders api
+    3. use api in page
+29. Deliver Order For Admin
+    1. create deliver api
+    2. add deliver button
+    3. implement click handler

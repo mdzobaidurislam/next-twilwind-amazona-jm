@@ -31,6 +31,7 @@ function Auth({ children, adminOnly }) {
       router.push("/unauthorized?message=login required");
     },
   });
+
   console.log(session);
 
   if (status === "loading") {

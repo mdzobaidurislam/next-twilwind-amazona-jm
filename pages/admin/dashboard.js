@@ -14,6 +14,8 @@ import {
 import React, { useEffect, useReducer } from "react";
 import Layout from "../../components/Layout";
 import { getError } from "../../utils/error";
+import AdminSidebar from "../../components/AdminSidebar";
+import { useSession } from "next-auth/react";
 
 ChartJS.register(
   CategoryScale,
@@ -46,6 +48,7 @@ function reducer(state, action) {
   }
 }
 function AdminDashboardScreen() {
+  const { data: session } = useSession();
   const [{ loading, error, summary }, dispatch] = useReducer(reducer, {
     loading: true,
     summary: { salesData: [] },
@@ -76,30 +79,18 @@ function AdminDashboardScreen() {
       },
     ],
   };
+  if (!session) {
+    return (
+      <Layout>
+        <h1>Access Denied</h1>
+      </Layout>
+    );
+  }
   return (
     <Layout title="Admin Dashboard">
       <div className="grid  md:grid-cols-4 md:gap-5">
         <div>
-          <ul>
-            <li>
-              <Link href="/admin/dashboard" legacyBehavior>
-                <a className="font-bold">Dashboard</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/admin/orders">Orders</Link>
-            </li>
-            <li>
-              <Link href="/admin/products" legacyBehavior>
-                Products
-              </Link>
-            </li>
-            <li>
-              <Link href="/admin/users" legacyBehavior>
-                Users
-              </Link>
-            </li>
-          </ul>
+          <AdminSidebar />
         </div>
         <div className="md:col-span-3">
           <h1 className="mb-4 text-xl">Admin Dashboard</h1>
